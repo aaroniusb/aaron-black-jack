@@ -21,7 +21,8 @@ int CardDrawnLast;
 int HCard1;
 int HCard2;
 int HCardSum;
-int HCardDrawn;
+int HCardDraws;
+int HCardDrawnLast;
 
 //game state chosing 
 void Selectr(){
@@ -47,11 +48,26 @@ void CardDraw(){
     HCard1 = rand() % 13 + 1;
     HCard2 = rand() % 13 + 1;
 
-    if(HCardSum != 21){
     std::cout <<"Your cards:" << Card1 << " and " << Card2 << endl;
     std::cout <<"House's cards:" << HCard1 << " and " << HCard2 << endl;
+    
+    if(Card1 > 10){
+        Card1 = 10;
     }
 
+    if(Card2 > 10){
+        Card2 = 10;
+    }
+
+     if(HCard1 > 10){
+        HCard1 = 10;
+    }
+
+    if(HCard2 > 10){
+        HCard2 = 10;
+    }
+
+    CardSum = Card1 + Card2;
 
 }
 
@@ -59,9 +75,9 @@ void CardDraw(){
 void WinCalc(){
 
     CardSum = Card1 + Card2 + CardDraws;
-    HCardSum = HCard1 + HCard2; 
+    HCardSum = HCard1 + HCard2 + HCardDraws; 
 
-    if(CardSum > HCardSum ){
+    if(CardSum > HCardSum && CardSum < 21){
         std::cout <<"YOU WIN!:)" << endl;
         std::cout <<"Your score: " << CardSum <<" House score: " << HCardSum  << endl;
     }
@@ -75,6 +91,7 @@ void WinCalc(){
         std::cout <<"You Draw :p" << endl;
         std::cout <<"Your score: " << CardSum <<" House score: " << HCardSum  << endl;
     }
+
 
 
 }
@@ -95,14 +112,22 @@ void ActionSelect(){
             cin.ignore(255, '\n');
         }
 
+        //player staying
         if(PlayAction == 1){
             std::cout << "staying" << std::endl;
             GameAction = 1;
         }
 
+        //player drawing
         if(PlayAction == 2){
             CardDrawnLast = rand() % 13 + 1;
             std::cout << "You drew a " << CardDrawnLast << std::endl;
+
+        if(CardDrawnLast > 10){
+            CardDrawnLast = 10;
+        }
+
+   
             CardDraws += CardDrawnLast;
 
         if(CardDraws + CardSum > 21){
