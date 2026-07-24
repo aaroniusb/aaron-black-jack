@@ -25,43 +25,56 @@ void Selectr(){
     cin >> gamestate;
 }
 
+void CardDraw(){
+    srand(time(0));
+
+    Card1 = rand() % 13 + 1;
+    Card2 = rand() % 13 + 1;
+
+    HCard1 = rand() % 13 + 1;
+    HCard2 = rand() % 13 + 1;
+
+    std::cout <<"Your cards:" << Card1 << " and " << Card2 << endl;
+    std::cout <<"House's cards:" << HCard1 << " and " << HCard2 << endl;
+
+}
+
+void WinCalc(){
+
+    if(CardSum > HCardSum ){
+        std::cout <<"YOU WIN!:)" << endl;
+        std::cout <<"Your score: " << CardSum <<" House score: " << HCardSum  << endl;
+    }
+
+    if(CardSum < HCardSum ){
+        std::cout <<"You Lose :(" << endl;
+        std::cout <<"Your score: " << CardSum <<" House score: " << HCardSum  << endl;
+    }
+        
+    if(CardSum == HCardSum ){
+        std::cout <<"You Draw :p" << endl;
+        std::cout <<"Your score: " << CardSum <<" House score: " << HCardSum  << endl;
+    }
+
+
+}
 
 int main(){
     gamestate = 0;
-    std::cout << "hello welcome to black jack" << std::endl;
+    std::cout << "Hello, Welcome to Aaron's Black Jack" << std::endl;
 
     Selectr();    
     
     //playing
     while (gamestate == 1) {
         std::cout << endl;
-        srand(time(0));
-        Card1 = rand() % 13 + 1;
-        Card2 = rand() % 13 + 1;
 
-        HCard1 = rand() % 13 + 1;
-        HCard2 = rand() % 13 + 1;
-
-        std::cout <<"Your cards:" << Card1 << " and " << Card2 << endl;
-        std::cout <<"House's cards:" << HCard1 << " and " << HCard2 << endl;
-
+        CardDraw();
+    
         CardSum = Card1 + Card2;
         HCardSum = HCard1 + HCard2;
 
-        if(CardSum > HCardSum ){
-            std::cout <<"YOU WIN!:)" << endl;
-            std::cout <<"Your score: " << CardSum <<" house score: " << HCardSum  << endl;
-        }
-
-        if(CardSum < HCardSum ){
-            std::cout <<"You Lose :(" << endl;
-            std::cout <<"Your score: " << CardSum <<" house score: " << HCardSum  << endl;
-        }
-        
-         if(CardSum == HCardSum ){
-            std::cout <<"You Draw :p" << endl;
-            std::cout <<"Your score: " << CardSum <<" house score: " << HCardSum  << endl;
-        }
+        WinCalc();
 
         std::cout << endl;
         Selectr();
